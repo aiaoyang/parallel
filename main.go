@@ -25,6 +25,9 @@ func main() {
 			select {
 			case s := <-sigCh:
 				log.Printf("got signal: %v\n", s)
+				if s != os.Interrupt {
+					continue
+				}
 				cancel()
 				return
 			default:
